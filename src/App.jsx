@@ -45,18 +45,19 @@ const Explosion = () => {
     canvas.height = window.innerHeight;
 
     const particles = [];
-    const particleCount = 2000;
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 400 : 1500;
 
     for (let i = 0; i < particleCount; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const velocity = Math.random() * 45 + 5; 
+      const velocity = Math.random() * (isMobile ? 25 : 45) + 5; 
       
       particles.push({
         x: canvas.width / 2,
         y: canvas.height / 2,
         vx: Math.cos(angle) * velocity,
         vy: Math.sin(angle) * velocity,
-        size: Math.random() * 35 + 10,
+        size: Math.random() * (isMobile ? 20 : 35) + 10,
         color: ['#ff0000', '#ff69b4', '#ff1493', '#e11d48', '#fb7185'][Math.floor(Math.random() * 5)],
         life: 1, 
         decay: Math.random() * 0.008 + 0.002,
